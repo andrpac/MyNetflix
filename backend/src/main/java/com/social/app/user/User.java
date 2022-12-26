@@ -15,7 +15,6 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
-
     private String password;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Series> series;

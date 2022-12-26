@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class AppController {
     @Autowired
     private final AppService appService;
@@ -21,14 +22,14 @@ public class AppController {
         return appService.displayUsers();
     }
 
-    @GetMapping(path = "/query")
-    private User getUser(@RequestBody String email) {
-        appService.displayUser(email);
+    @GetMapping(path = "/query/{email}")
+    private User getUser(@PathVariable String email) {
+        return appService.displayUser(email);
     }
 
     @PostMapping(path = "/")
-    private void postUser(@RequestBody User user) {
-        appService.createUser(user);
+    private User postUser(@RequestBody User user) {
+        return appService.createUser(user);
     }
 
     @PostMapping(path = "/{id}/series")

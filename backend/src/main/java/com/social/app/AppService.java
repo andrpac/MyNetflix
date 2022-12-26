@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AppService {
+    User dummyUser = new User();
 
     @Autowired
     private final UserRepository userRepository;
@@ -23,11 +25,17 @@ public class AppService {
     }
 
     public User displayUser(String email) {
-        return userRepository.getUserByEmail(email).orElse(null);
+        return userRepository.getUserByEmail(email).orElse(dummyUser);
     }
 
-    public void createUser(User user) {
+    public User createUser(User user) {
+        Optional<User> userExists = userRepository.getUserByEmail(user.getEmail());
+        if(userExists.isPresent()) {
+            return dummyUser;
+        }
+
         userRepository.save(user);
+        return user;
     }
 
     public void updateUser(Long id, User user) {
