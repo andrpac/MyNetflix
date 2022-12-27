@@ -38,14 +38,11 @@ function Register() {
         <div className='login-component'>
           <div className='login-border'>
             <form onSubmit={(e) => handleSubmit(e)}>
-                <label>First Name: </label>
-                <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}></input><br />
-                <label>Last Name: </label>
-                <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)}></input><br />
-                <label>Email: </label>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}></input><br />
-                <label>Password: </label>
-                <input type="password "value={password} onChange={(e) => setPassword(e.target.value)}></input><br />
+                <label> Create Account</label>
+                <input type="text" required value={firstName} placeholder="First Name" onChange={(e) => setFirstName(e.target.value)}></input><br />
+                <input type="text"  required value={lastName} placeholder="Last Name" onChange={(e) => setLastName(e.target.value)}></input><br />
+                <input type="email" required value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)}></input><br />
+                <input type="password" required value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input><br />
                 <input type="submit" className='submit' value="Register" />
             </form>
           </div>
