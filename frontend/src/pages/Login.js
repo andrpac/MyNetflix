@@ -1,3 +1,4 @@
+import './Login.css';
 import { useState } from 'react'
 
 function Login(){
@@ -26,14 +27,15 @@ function Login(){
     }
 
     return (
-        <div>
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <label>Email: </label>
-            <textarea value={email} onChange={(e) => setEmail(e.target.value)}></textarea>
-            <label>Password: </label>
-            <textarea value={password} onChange={(e) => setPassword(e.target.value)}></textarea>
-            <button>{'Submit'}</button>
-          </form>
+        <div className="login-component">
+          <div className="login-border">
+            <form onSubmit={(e) => handleSubmit(e)}>
+                <label>Sign In </label>
+                <input type="text" required value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)}></input><br/>
+                <input type="password" required value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input><br/>
+                <input type="submit" className='submit' value={"Login"}></input>
+            </form>
+          </div>
         </div>
     )
 }

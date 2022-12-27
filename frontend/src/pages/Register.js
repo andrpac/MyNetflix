@@ -1,3 +1,4 @@
+import './Login.css'
 import { useState } from 'react'
 
 function Register() {
@@ -33,18 +34,21 @@ function Register() {
         })
     }
 
-    return (<div>
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <label>First Name: </label>
-          <textarea value={firstName} onChange={(e) => setFirstName(e.target.value)}></textarea>
-          <label>Last Name: </label>
-          <textarea value={lastName} onChange={(e) => setLastName(e.target.value)}></textarea>
-          <label>Email: </label>
-          <textarea value={email} onChange={(e) => setEmail(e.target.value)}></textarea>
-          <label>Password: </label>
-          <textarea value={password} onChange={(e) => setPassword(e.target.value)}></textarea>
-          <button>{'Submit'}</button>
-        </form>
+    return (
+        <div className='login-component'>
+          <div className='login-border'>
+            <form onSubmit={(e) => handleSubmit(e)}>
+                <label>First Name: </label>
+                <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}></input><br />
+                <label>Last Name: </label>
+                <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)}></input><br />
+                <label>Email: </label>
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}></input><br />
+                <label>Password: </label>
+                <input type="password "value={password} onChange={(e) => setPassword(e.target.value)}></input><br />
+                <input type="submit" className='submit' value="Register" />
+            </form>
+          </div>
         </div>
     )
 }
