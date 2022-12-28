@@ -1,5 +1,6 @@
 import './Login.css'
 import { useState } from 'react'
+import { Link } from 'react-router-dom';
 
 function Register() {
     const [firstName, setFirstName] = useState('');
@@ -36,14 +37,19 @@ function Register() {
 
     return (
         <div className='login-component'>
+          <div className='navbar-component' style={{'textAlign': 'left'}}>
+            <Link to='/'>
+              <button>Back</button>
+            </Link> 
+          </div>
           <div className='login-border'>
             <form onSubmit={(e) => handleSubmit(e)}>
-                <label> Create Account</label>
-                <input type="text" required value={firstName} placeholder="First Name" onChange={(e) => setFirstName(e.target.value)}></input><br />
-                <input type="text"  required value={lastName} placeholder="Last Name" onChange={(e) => setLastName(e.target.value)}></input><br />
-                <input type="email" required value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)}></input><br />
-                <input type="password" required value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input><br />
-                <input type="submit" className='submit' value="Register" />
+              <label> Create Account</label>
+              <input type="text" required value={firstName} placeholder="First Name" onChange={(e) => setFirstName(e.target.value)}></input><br />
+              <input type="text"  required value={lastName} placeholder="Last Name" onChange={(e) => setLastName(e.target.value)}></input><br />
+              <input type="email" required value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)}></input><br />
+              <input type="password" required value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input><br />
+              <input type="submit" className='submit' value="Register" />
             </form>
           </div>
         </div>

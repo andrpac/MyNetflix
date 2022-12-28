@@ -1,5 +1,6 @@
 import './Login.css';
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function Login(){
     const [email, setEmail] = useState('');
@@ -35,13 +36,20 @@ function Login(){
 
     return (
         <div className='login-component'>
+          <div className='navbar-component' style={{'textAlign': 'left'}}>
+            <Link to='/'>
+              <button>Back</button>
+            </Link> 
+          </div>
           <div className='login-border'>
             <form onSubmit={(e) => handleSubmit(e)}>
-                <label>Sign In </label>
-                <input type='text' required value={email} placeholder='Email' onChange={(e) => setEmail(e.target.value)}></input><br/>
-                <input type='password' required value={password} placeholder='Password' onChange={(e) => setPassword(e.target.value)}></input><br/>
-                <input type='submit' className='submit' value={'Login'}></input>
-                {attemptLogin ? <p className='error'>{attemptLogin}</p> : <p className='error' style={{'color':'black'}}>Hey</p>}
+              <label>Sign In </label>
+              <input type='text' required value={email} placeholder='Email' 
+                onChange={(e) => setEmail(e.target.value)}></input><br/>
+              <input type='password' required value={password} placeholder='Password' 
+                onChange={(e) => setPassword(e.target.value)}></input><br/>
+              <input type='submit' className='submit' value={'Login'}></input>
+              {attemptLogin ? <p className='error'>{attemptLogin}</p> : <p className='error' style={{'color':'black'}}>a</p>}
             </form>
           </div>
         </div>
