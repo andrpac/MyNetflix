@@ -23,7 +23,9 @@ function App() {
         <Route exact path='/' element={<Home />}/>
         <Route exact path='/login' element={<Login activateLogin = {(data) => enableLogin(data)} />} />
         <Route exact path='/register' element={<Register />} />
-        {loginEnable && <Route exact path='/series' element={<Series user={user} />} />}
+        {loginEnable ? 
+           <Route exact path='/series' element={<Series user={user} />} /> :
+           <Route exact path='/series' element={<div className='background'></div>} />}
       </Routes>
     </Router>
   );

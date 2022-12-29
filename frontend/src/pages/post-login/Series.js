@@ -1,6 +1,8 @@
 import '../../App.css';
 import SeriesModel from './components/SeriesModel';
 
+import { Link } from 'react-router-dom';
+
 function Series(props) {
     
     const user = props.user;
@@ -11,7 +13,14 @@ function Series(props) {
     
     return (
         <div className='background-series'>
-          <div className='background-series-fade'></div>
+          <div className='background-fade'>
+            <Link to='/'>
+              <button className='navbar-button'>Add Series</button> 
+            </Link> 
+            <Link to='/'>
+              <button className='navbar-button'>Sign out</button>
+            </Link>
+          </div>
           <div className='series-align'>
             {series.map((currSeries) => <SeriesModel series={currSeries} /> )}
           </div>

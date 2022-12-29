@@ -2,18 +2,14 @@
     margin: -8px;
     width: 100%;
     height: 100%;
-    background-image: url(https://miro.medium.com/max/4800/1*5lyavS59mazOFnb55Z6znQ.webp); 
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.7), 
+        rgba(0, 0, 0, 0.7)
+      ), url(https://miro.medium.com/max/4800/1*5lyavS59mazOFnb55Z6znQ.webp); 
     background-size: cover; 
     overflow: auto;
     position: absolute;
     font-family: Arial, Helvetica, sans-serif;
-    opacity: 0.9;
-}
-
-.background-series-fade {
-    display: inline-block;
-    padding: 2%; 
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.99), rgba(255, 255, 255, 0));
 }
 
 .series-align {
@@ -24,7 +20,8 @@
 
 .series-border {
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-bottom: 40px;
     border: 5px solid white;
     background-color: black; 
     padding: 10px;  
