@@ -1,14 +1,16 @@
+import '../../App.css';
+
 import { Link } from "react-router-dom";
 
 function Home() {
     return (
-        <div className='login-component'>
-          <div className='navbar-component'>
+        <div className='background'>
+          <div className='background-fade'>
             <Link to='/login'>
-              <button>Login</button>
+              <button className='navbar-button'>Login</button>
             </Link>
             <Link to='/register'> 
-              <button>Register</button>
+              <button className='navbar-button'>Register</button>
             </Link>
           </div>
         </div>

@@ -11,17 +11,21 @@ public class Series {
     private String seriesName;
     private Integer episodes;
 
+    private String imageUrl;
+
     public Series() { }
 
-    public  Series(String seriesName, Integer episodes) {
+    public  Series(String seriesName, Integer episodes, String imageUrl) {
         this.seriesName = seriesName;
         this.episodes = episodes;
+        this.imageUrl = imageUrl;
     }
 
-    public Series(Long id, String seriesName, Integer episodes) {
+    public Series(Long id, String seriesName, Integer episodes, String imageUrl) {
         this.id = id;
         this.seriesName = seriesName;
         this.episodes = episodes;
+        this.imageUrl = imageUrl;
     }
 
     public Long getId() {
@@ -36,6 +40,10 @@ public class Series {
         return episodes;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -46,5 +54,9 @@ public class Series {
 
     public void setEpisodes(Integer episodes) {
         this.episodes = episodes;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

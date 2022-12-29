@@ -1,11 +1,14 @@
-import './Login.css';
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import './pre-login.css';
+import '../../App.css';
 
-function Login(){
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+
+function Login(props){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [attemptLogin, setAttempLogin] = useState('');
+    const navigate = useNavigate();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -24,8 +27,10 @@ function Login(){
                 throw Error("Invalid credentails!")
             }
 
-            setAttempLogin('');
-            console.log('Success', data);
+            setAttempLogin('');          
+            props.activateLogin(data);
+            navigate('../series');
+            
         })
         .catch((error) => {
             setAttempLogin(error.message);
@@ -35,10 +40,10 @@ function Login(){
     }
 
     return (
-        <div className='login-component'>
-          <div className='navbar-component' style={{'textAlign': 'left'}}>
+        <div className='background'>
+          <div className='background-fade' style={{'textAlign': 'left'}}>
             <Link to='/'>
-              <button>Back</button>
+              <button className='navbar-button'>Back</button>
             </Link> 
           </div>
           <div className='login-border'>

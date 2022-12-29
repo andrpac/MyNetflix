@@ -1,4 +1,6 @@
-import './Login.css'
+import './pre-login.css'
+import '../../App.css';
+
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
 
@@ -36,10 +38,10 @@ function Register() {
     }
 
     return (
-        <div className='login-component'>
-          <div className='navbar-component' style={{'textAlign': 'left'}}>
+        <div className='background'>
+          <div className='background-fade' style={{'textAlign': 'left'}}>
             <Link to='/'>
-              <button>Back</button>
+              <button className='navbar-button'>Back</button>
             </Link> 
           </div>
           <div className='login-border'>
