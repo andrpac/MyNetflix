@@ -36,7 +36,6 @@ function Login(props){
             setAttempLogin(error.message);
             console.error(error);
         })
-
     }
 
     return (
