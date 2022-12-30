@@ -9,8 +9,8 @@ import { Link } from 'react-router-dom';
 
 function Series(props) {
     const user = props.user;
-    const series = user.series;
 
+    const [series, setSeries] = useState(user.series);
     const [createSeries, setCreateSeries] = useState(false);
     const [activeSeries, setActiveSeries] = useState(null);
 
@@ -32,6 +32,23 @@ function Series(props) {
 
     function handleExitSeriesDetails() {
         setActiveSeries(null);
+
+        fetch('http://localhost:8080/' + user.id + '/series', {
+            method: 'GET', 
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then((response) => {        
+            return response.json();
+        })
+        .then((data) => {
+            setSeries(data);
+            
+        })
+        .catch((error) => {
+            console.error(error);
+        })                
     }
 
     return (
@@ -45,9 +62,9 @@ function Series(props) {
             </Link>
           </div>
           {createSeries && <AddSeries userid={user.id} handleExitAddSeries={handleExitAddSeries}/>}
-          {activeSeries && <EditSeries series={activeSeries} handleExitSeriesDetails={handleExitSeriesDetails} />}
+          {activeSeries && <EditSeries userid={user.id} series={activeSeries} handleExitSeriesDetails={handleExitSeriesDetails} />}
           <div className='series-align'>
-            {series.map((currSeries) => <SeriesModel handleSeriesDetails={
+            {series && series.map((currSeries) => <SeriesModel handleSeriesDetails={
               (data) => handleSeriesDetails(data)} 
                  key={currSeries.id} series={currSeries} /> )}
           </div>

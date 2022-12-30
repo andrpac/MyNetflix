@@ -25,7 +25,6 @@ function App() {
         <Route exact path='/login' element={<Login activateLogin = {(data) => enableLogin(data)} />} />
         <Route exact path='/register' element={<Register />} />
         {loginEnable && <Route exact path='/series' element={<Series user={user} />} />}
-        { /* loginEnable && <Route exact path='/series/create' element={<AddSeries userid={user.id}/>}> </Route> */}
         <Route path='*'element={<div className='background'></div>}></Route>
       </Routes>
     </Router>

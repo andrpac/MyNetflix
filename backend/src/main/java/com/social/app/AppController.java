@@ -22,6 +22,11 @@ public class AppController {
         return appService.displayUsers();
     }
 
+    @GetMapping(path="/{id}/series")
+    private List<Series> getUserSeries(@PathVariable Long id) {
+        return appService.displayUserSeries(id);
+    }
+
     @GetMapping(path = "/query/{email}")
     private User getUser(@PathVariable String email) {
         return appService.displayUser(email);

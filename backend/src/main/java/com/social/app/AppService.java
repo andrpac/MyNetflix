@@ -24,6 +24,12 @@ public class AppService {
         return userRepository.findAll();
     }
 
+    public List<Series> displayUserSeries(Long id) {
+        User userExists = userRepository.findById(id).orElseThrow(()
+                -> new IllegalStateException("User does not exist!"));
+
+        return userExists.getSeries();
+    }
     public User displayUser(String email) {
         return userRepository.getUserByEmail(email).orElse(dummyUser);
     }

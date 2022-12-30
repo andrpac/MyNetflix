@@ -30,8 +30,7 @@ function AddSeries(props) {
         })
         .catch((error) => {
             console.error(error);
-        })
-        
+        }) 
     }
 
     return (

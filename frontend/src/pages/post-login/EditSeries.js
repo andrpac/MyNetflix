@@ -1,12 +1,34 @@
 import { useState } from 'react'; 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function EditSeries(props) {
     const [seriesName, setSeriesName] = useState(props.series.seriesName);
     const [imgUrl, setImgUrl] = useState(props.series.imageUrl);
+    const navigate = useNavigate();
 
     function handleSubmit(e) {
         e.preventDefault();
+
+        fetch('http://localhost:8080/' + props.userid + '/series/' + props.series.id, {
+            method: 'PUT', 
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                seriesName: seriesName,
+                episodes: 80,
+                imageUrl: imgUrl,
+            })
+        })
+        .then((response) => {        
+            if(response.ok) {
+                props.handleExitSeriesDetails();
+                navigate('../series');
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+        }) 
     } 
 
     return (
