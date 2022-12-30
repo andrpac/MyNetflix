@@ -11,11 +11,24 @@ function Series(props) {
     const user = props.user;
     const series = user.series;
 
+    const [createSeries, setCreateSeries] = useState(false);
     const [activeSeries, setActiveSeries] = useState(null);
 
+    /* Used for AddSeries */
+    function handleCreateAddSeries() {
+        setCreateSeries(true);
+    }
+
+    function handleExitAddSeries() {
+        setCreateSeries(false);
+    }
+
+
+    /* Used for EditSeries */
     function handleSeriesDetails(data) {
         setActiveSeries(data);
     }
+
 
     function handleExitSeriesDetails() {
         setActiveSeries(null);
@@ -24,13 +37,14 @@ function Series(props) {
     return (
         <div className='background-series'>
           <div className='background-fade'>
-            <Link to='./create/'>
-              <button className='navbar-button'>Add Series</button> 
+            <Link>
+              <button onClick={handleCreateAddSeries} className='navbar-button'>Add Series</button> 
             </Link> 
             <Link to='/'>
               <button className='navbar-button'>Sign out</button>
             </Link>
           </div>
+          {createSeries && <AddSeries userid={user.id} handleExitAddSeries={handleExitAddSeries}/>}
           {activeSeries && <EditSeries series={activeSeries} handleExitSeriesDetails={handleExitSeriesDetails} />}
           <div className='series-align'>
             {series.map((currSeries) => <SeriesModel handleSeriesDetails={

@@ -57,6 +57,15 @@ public class AppService {
         userRepository.save(userToUpdate);
     }
 
+
+    public void updateUserSeries(Long id, Long seriesId, Series series) {
+        User userToUpdate = userRepository.findById(id).orElseThrow(()
+                -> new IllegalStateException("User does not exist!"));
+
+        userToUpdate.updateSeries(seriesId, series);
+        userRepository.save(userToUpdate);
+    }
+
     public void deleteUser(Long id) {
         User userToDelete = userRepository.findById(id).orElseThrow(()
             -> new IllegalStateException(("User does not exist!")));

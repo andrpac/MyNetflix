@@ -95,6 +95,18 @@ public class User {
         this.series.add(seriesToAdd);
     }
 
+    public void updateSeries(Long id, Series series){
+        for(int i=0; i<this.series.size(); i++) {
+            if(this.series.get(i).getId() == id) {
+                this.series.get(i).setSeriesName(series.getSeriesName());
+                this.series.get(i).setEpisodes(series.getEpisodes());
+                this.series.get(i).setImageUrl(series.getImageUrl());
+                this.series.get(i).setRating(series.getRating());
+                this.series.get(i).setComments(series.getComments());
+            }
+        }
+    }
+
     public void deleteSeries(Long id) {
         for(int i=0; i<this.series.size(); i++) {
             if(series.get(i).getId() == id) {

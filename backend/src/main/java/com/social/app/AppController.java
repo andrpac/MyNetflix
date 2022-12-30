@@ -42,6 +42,11 @@ public class AppController {
         appService.updateUser(id, user);
     }
 
+    @PutMapping(path= "/{id}/series/{seriesId}")
+    private void putUserSeries(@PathVariable Long id, @PathVariable Long seriesId, @RequestBody Series series) {
+        appService.updateUserSeries(id, seriesId, series);
+    }
+
     @DeleteMapping(path = "/{id}")
     private void deleteUser(@PathVariable Long id) {
         appService.deleteUser(id);

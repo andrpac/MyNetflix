@@ -35,15 +35,14 @@ function AddSeries(props) {
     }
 
     return (
-        <div className='background'>
+        <div className='series-popup'>
           <div className='background-fade' style={{'textAlign': 'left'}}>
             <Link to='../series'>
-              <button className='navbar-button'>Back</button> 
+              <button onClick={props.handleExitAddSeries} className='navbar-button'>Back</button> 
             </Link> 
           </div>
           <div className='login-border'>
             <form onSubmit={(e) => handleSubmit(e)}>
-              <label> Add a new series </label>
               <input type='text' required value={seriesName} placeholder='Series Name' 
                 onChange={(e) => setSeriesName(e.target.value)}></input><br/>
               <input type='text' required value={imgUrl} placeholder='Image Url' 

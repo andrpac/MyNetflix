@@ -10,22 +10,27 @@ public class Series {
     private Long id;
     private String seriesName;
     private Integer episodes;
-
     private String imageUrl;
+    private Float rating;
+    private String comments;
 
     public Series() { }
 
-    public  Series(String seriesName, Integer episodes, String imageUrl) {
+    public  Series(String seriesName, Integer episodes, String imageUrl, Float rating, String comments) {
         this.seriesName = seriesName;
         this.episodes = episodes;
         this.imageUrl = imageUrl;
+        this.rating = rating;
+        this.comments = comments;
     }
 
-    public Series(Long id, String seriesName, Integer episodes, String imageUrl) {
+    public Series(Long id, String seriesName, Integer episodes, String imageUrl, Float rating, String comments) {
         this.id = id;
         this.seriesName = seriesName;
         this.episodes = episodes;
         this.imageUrl = imageUrl;
+        this.rating = rating;
+        this.comments = comments;
     }
 
     public Long getId() {
@@ -44,6 +49,14 @@ public class Series {
         return imageUrl;
     }
 
+    public Float getRating() {
+        return rating;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -58,5 +71,13 @@ public class Series {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public void setRating(Float rating) {
+        this.rating = rating;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 }
