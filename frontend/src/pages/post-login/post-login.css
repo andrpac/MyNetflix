@@ -50,6 +50,15 @@
     border: 2px solid black;
 }
 
+.series-search-bar {
+    display: inline;
+}
+
+
+.series-search-bar-field {
+    width: 60%;
+}
+
 .series-popup {
     position: fixed;
     top: 0;
