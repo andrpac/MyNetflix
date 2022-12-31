@@ -56,7 +56,8 @@ function Series(props) {
     
 
     function handleSearchEntries(e) {
-        setSeries(allSeries.filter((series) => series.seriesName.includes(e.target.value)));
+        setSeries(allSeries.filter((series) => 
+          series.seriesName.toLowerCase().includes(e.target.value.toLowerCase())));
         setSearchSeries(e.target.value); 
     }
 
