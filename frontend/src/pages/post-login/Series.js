@@ -16,7 +16,25 @@ function Series(props) {
     const [activeSeries, setActiveSeries] = useState(null);
     const [searchSeries, setSearchSeries] = useState('');
 
-    console.log(series);
+    function fetchSeries() {
+        fetch('http://localhost:8080/' + user.id + '/series', {
+            method: 'GET', 
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then((response) => {        
+            return response.json();
+        })
+        .then((data) => {
+            setSeries(data);
+            setAllSeries(data);
+
+        })
+        .catch((error) => {
+            console.error(error);
+        })   
+    }
 
     /* Used for AddSeries */
     function handleCreateAddSeries() {
@@ -34,24 +52,8 @@ function Series(props) {
     }
 
     function handleExitSeriesDetails() {
-        setActiveSeries(null);
-
-        fetch('http://localhost:8080/' + user.id + '/series', {
-            method: 'GET', 
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        .then((response) => {        
-            return response.json();
-        })
-        .then((data) => {
-            setSeries(data);
-            
-        })
-        .catch((error) => {
-            console.error(error);
-        })                
+        setActiveSeries(null);  
+        fetchSeries();             
     }
     
 
@@ -80,9 +82,12 @@ function Series(props) {
           {createSeries && <AddSeries userid={user.id} handleExitAddSeries={handleExitAddSeries}/>}
           {activeSeries && <EditSeries userid={user.id} series={activeSeries} handleExitSeriesDetails={handleExitSeriesDetails} />}
           <div className='series-align'>
-            {series && series.map((currSeries) => <SeriesModel handleSeriesDetails={
+            {series && !activeSeries && !createSeries &&
+             series.sort((a, b) => a.id > b.id ? 1 : -1).map((currSeries) => 
+             <SeriesModel key={currSeries.id} handleSeriesDetails={
               (data) => handleSeriesDetails(data)} 
-                 key={currSeries.id} series={currSeries} /> )}
+               handleExitSeriesDetails={handleExitSeriesDetails} 
+               series={currSeries} userid={user.id} /> )}
           </div>
         </div>
     )

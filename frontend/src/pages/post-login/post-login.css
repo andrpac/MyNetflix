@@ -57,6 +57,7 @@
 
 .series-search-bar-field {
     width: 60%;
+    height: 40px;
 }
 
 .series-popup {
@@ -92,8 +93,19 @@
 }
 
 
+.btn {
+    background: rgba(0,0,0,0);
+    position: absolute;
+    top:  0;
+    right: 0;
+    border: none;
+    color: red; 
+    font-size: 25px; 
+    cursor: pointer;
+}
+
 img {
-    display: block;
+    display: inline;
     max-width: 200px;
     max-height: 300px;
 }
