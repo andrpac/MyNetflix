@@ -23,7 +23,7 @@ function SeriesModel(props) {
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
           <div style={{'display': 'block', 'position': 'relative'}}>
             <img alt={props.series.seriesName} src={props.series.imageUrl} />
-            <button class="btn" onClick={handleDelete}><i class="fa fa-trash"></i></button>   
+            {props.deleteButton && <button className="btn" onClick={handleDelete}><i className="fa fa-trash"></i></button>}
           </div>
           <div className='series-border-footer'>
             <button className='series-button-footer' onClick={

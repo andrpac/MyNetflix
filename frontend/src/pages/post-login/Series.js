@@ -84,7 +84,7 @@ function Series(props) {
           <div className='series-align'>
             {series && !activeSeries && !createSeries &&
              series.sort((a, b) => a.id > b.id ? 1 : -1).map((currSeries) => 
-             <SeriesModel key={currSeries.id} handleSeriesDetails={
+             <SeriesModel key={currSeries.id} deleteButton={true} handleSeriesDetails={
               (data) => handleSeriesDetails(data)} 
                handleExitSeriesDetails={handleExitSeriesDetails} 
                series={currSeries} userid={user.id} /> )}
