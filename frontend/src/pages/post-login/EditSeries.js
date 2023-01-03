@@ -1,10 +1,14 @@
 import { useState } from 'react'; 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function EditSeries(props) {
     const [seriesName, setSeriesName] = useState(props.series.seriesName);
     const [imgUrl, setImgUrl] = useState(props.series.imageUrl);
-    const navigate = useNavigate();
+    const [comments, setComments] = useState(props.series.comments);
+
+    if(props.series.comments == null) {
+        props.series.comments = 'Your comments...'
+    }
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -18,12 +22,12 @@ function EditSeries(props) {
                 seriesName: seriesName,
                 episodes: 80,
                 imageUrl: imgUrl,
+                comments: comments,
             })
         })
         .then((response) => {        
             if(response.ok) {
                 props.handleExitSeriesDetails();
-                navigate('../series');
             }
         })
         .catch((error) => {
@@ -39,13 +43,18 @@ function EditSeries(props) {
             </Link> 
           </div>
           <div className='series-popup-inner'>
-            <img className='series-popup-image' src={props.series.imageUrl} />
+            <img className='series-popup-image' alt={props.series.seriesName} src={props.series.imageUrl} />
             <form style={{'marginTop': '15px'}} onSubmit={(e) => handleSubmit(e)}>
               <input type='text' required value={seriesName} placeholder={seriesName} 
-                onChange={(e) => setSeriesName(e.target.value)}></input><br/>
+                onChange={(e) => setSeriesName(e.target.value)}>
+              </input><br/>
               <input type='text' required value={imgUrl} placeholder='Image Url' 
-                onChange={(e) => setImgUrl(e.target.value)}></input><br/>
-              <input type='submit' className='submit' value={'Edit Series'}></input>
+                onChange={(e) => setImgUrl(e.target.value)}>
+              </input><br/>
+              <textarea placeholder={props.series.comments} value={comments} 
+                onChange={(e) => {console.log(e.target.value); setComments(e.target.value)}}>
+              </textarea>
+              <input type='submit' className='submit' value={'Edit Series'} style={{'marginTop': '5%'}}></input>
             </form>
           </div>
         </div>

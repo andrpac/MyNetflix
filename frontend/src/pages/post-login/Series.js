@@ -6,14 +6,13 @@ import SeriesModel from './components/SeriesModel';
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { Route, Routes} from 'react-router-dom';
 
 function Series(props) {
     const user = props.user;
     const [series, setSeries] = useState(user.series);
     const [allSeries, setAllSeries] = useState(user.series);
 
-    const [createSeries, setCreateSeries] = useState(false);
     const [activeSeries, setActiveSeries] = useState(null);
     const [searchSeries, setSearchSeries] = useState('');
 
@@ -38,12 +37,7 @@ function Series(props) {
     }
 
     /* Used for AddSeries */
-    function handleCreateAddSeries() {
-        setCreateSeries(true);
-    }
-
     function handleExitAddSeries() {
-      setCreateSeries(false);
         fetchSeries();  
     }
 
@@ -77,7 +71,7 @@ function Series(props) {
                       onChange={(e) => handleSearchEntries(e)} /> 
                   </form>
                   <Link to='./all'>
-                    <button onClick={handleCreateAddSeries} className='navbar-button'>Add Series</button> 
+                    <button className='navbar-button'>Add Series</button> 
                   </Link> 
                   <Link to='/'>
                     <button className='navbar-button'>Sign out</button>
@@ -86,7 +80,7 @@ function Series(props) {
               </div>
               {activeSeries && <EditSeries userid={user.id} series={activeSeries} handleExitSeriesDetails={handleExitSeriesDetails} />}
               <div className='series-align'>
-                {series && !activeSeries && !createSeries &&
+                {series && !activeSeries &&
                 series.sort((a, b) => a.id > b.id ? 1 : -1).map((currSeries) => 
                 <SeriesModel key={currSeries.id} deleteButton={true} handleSeriesDetails={
                   (data) => handleSeriesDetails(data)} 
