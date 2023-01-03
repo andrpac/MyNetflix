@@ -11,11 +11,15 @@ Papa.parse(csvFile, {
   download: true,
   complete: function (input) {
        input.data.shift();
+       input.data.pop();
        records = input.data;
   }
 });
 
 function AddSeries(props) {
+    const [searchSeries, setSearchSeries] = useState('');
+    const [series, setSeries] = useState(records);
+
     const [seriesName, setSeriesName] = useState('');
     const [imgUrl, setImgUrl] = useState('');
     const [rating, setRating] = useState(-1);
@@ -23,7 +27,6 @@ function AddSeries(props) {
     const navigate = useNavigate();
 
     function handleSubmit(data) {
-      
         fetch('http://localhost:8080/' + props.userid + '/series', {
             method: 'POST', 
             headers: {
@@ -45,12 +48,23 @@ function AddSeries(props) {
         }) 
     }
 
+    function handleSearchEntries(e) {
+      setSeries(records.filter((record) => { 
+        return record[1].toLowerCase().includes(e.target.value.toLowerCase())
+      }));
+      setSearchSeries(e.target.value); 
+    }
+
     return (
         <div className='series-popup' style={{'overflow': 'auto'}}>
           <div className='background-fade' style={{'textAlign': 'left'}}>
             <Link to='../series'>
               <button onClick={props.handleExitAddSeries} className='navbar-button'>Back</button> 
             </Link> 
+            <form className='series-search-bar'>
+              <input type='text' className='series-search-bar-field' value={searchSeries} placeholder='Search Series' 
+                onChange={(e) => handleSearchEntries(e)} /> 
+            </form>
           </div>
 
           { /*
@@ -67,8 +81,8 @@ function AddSeries(props) {
           }
 
           <div className='series-align'>
-            {records &&
-             records.slice(0, 100).map((currRecord) => {
+            {series &&
+             series.slice(0, 204).map((currRecord) => {
                 const currSeries = {
                   seriesName: currRecord[1],
                   imageUrl: currRecord[2],
