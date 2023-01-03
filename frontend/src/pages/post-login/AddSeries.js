@@ -19,11 +19,6 @@ Papa.parse(csvFile, {
 function AddSeries(props) {
     const [searchSeries, setSearchSeries] = useState('');
     const [series, setSeries] = useState(records);
-
-    const [seriesName, setSeriesName] = useState('');
-    const [imgUrl, setImgUrl] = useState('');
-    const [rating, setRating] = useState(-1);
-    const [comments, setComments] = useState('');
     const navigate = useNavigate();
 
     function handleSubmit(data) {
@@ -39,6 +34,7 @@ function AddSeries(props) {
             })
         })
         .then((response) => {        
+            props.handleExitAddSeries();
             if(response.ok) {
                 navigate(-1);
             }
@@ -58,7 +54,7 @@ function AddSeries(props) {
     return (
         <div className='series-popup' style={{'overflow': 'auto'}}>
           <div className='background-fade' style={{'textAlign': 'left'}}>
-            <Link to='../series'>
+            <Link to='../'>
               <button onClick={props.handleExitAddSeries} className='navbar-button'>Back</button> 
             </Link> 
             <form className='series-search-bar'>
@@ -66,20 +62,6 @@ function AddSeries(props) {
                 onChange={(e) => handleSearchEntries(e)} /> 
             </form>
           </div>
-
-          { /*
-          <div className='login-border'>
-            <form onSubmit={(e) => handleSubmit(e)}>
-              <input type='text' required value={seriesName} placeholder='Series Name' 
-                onChange={(e) => setSeriesName(e.target.value)}></input><br/>
-              <input type='text' required value={imgUrl} placeholder='Image Url' 
-                onChange={(e) => setImgUrl(e.target.value)}></input><br/>
-              <input type='submit' className='submit' value={'Add Series'}></input>
-            </form>
-          </div>
-            */
-          }
-
           <div className='series-align'>
             {series &&
              series.slice(0, 204).map((currRecord) => {
@@ -90,8 +72,7 @@ function AddSeries(props) {
                 return (<SeriesModel key={currSeries[0]} handleSeriesDetails={(data) => handleSubmit(data)}
                   deleteButton={false} series={currSeries} userid={props.userid} />) 
              })}
-          </div>
-          
+          </div>  
         </div>    
     )
 }

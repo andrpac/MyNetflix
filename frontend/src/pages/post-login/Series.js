@@ -6,6 +6,7 @@ import SeriesModel from './components/SeriesModel';
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 function Series(props) {
     const user = props.user;
@@ -42,7 +43,8 @@ function Series(props) {
     }
 
     function handleExitAddSeries() {
-        setCreateSeries(false);
+      setCreateSeries(false);
+        fetchSeries();  
     }
 
 
@@ -64,32 +66,35 @@ function Series(props) {
     }
 
     return (
-        <div className='background-series'>
-          <div className='background-fade'>
-            <div style={{'marginRight': '8%'}}>
-              <form className='series-search-bar'>
-                <input type='text' className='series-search-bar-field' value={searchSeries} placeholder='Search Series' 
-                  onChange={(e) => handleSearchEntries(e)} /> 
-              </form>
-              <Link>
-                <button onClick={handleCreateAddSeries} className='navbar-button'>Add Series</button> 
-              </Link> 
-              <Link to='/'>
-                <button className='navbar-button'>Sign out</button>
-              </Link>
-            </div>
-          </div>
-          {createSeries && <AddSeries userid={user.id} handleExitAddSeries={handleExitAddSeries}/>}
-          {activeSeries && <EditSeries userid={user.id} series={activeSeries} handleExitSeriesDetails={handleExitSeriesDetails} />}
-          <div className='series-align'>
-            {series && !activeSeries && !createSeries &&
-             series.sort((a, b) => a.id > b.id ? 1 : -1).map((currSeries) => 
-             <SeriesModel key={currSeries.id} deleteButton={true} handleSeriesDetails={
-              (data) => handleSeriesDetails(data)} 
-               handleExitSeriesDetails={handleExitSeriesDetails} 
-               series={currSeries} userid={user.id} /> )}
-          </div>
-        </div>
+        <Routes>
+          <Route exact path='/all' element={<AddSeries userid={user.id} handleExitAddSeries={handleExitAddSeries}/>} /> 
+          <Route exact path='/' element={
+            <div className='background-series'>
+              <div className='background-fade'>
+                <div style={{'marginRight': '8%'}}>
+                  <form className='series-search-bar'>
+                    <input type='text' className='series-search-bar-field' value={searchSeries} placeholder='Search Series' 
+                      onChange={(e) => handleSearchEntries(e)} /> 
+                  </form>
+                  <Link to='./all'>
+                    <button onClick={handleCreateAddSeries} className='navbar-button'>Add Series</button> 
+                  </Link> 
+                  <Link to='/'>
+                    <button className='navbar-button'>Sign out</button>
+                  </Link>
+                </div>
+              </div>
+              {activeSeries && <EditSeries userid={user.id} series={activeSeries} handleExitSeriesDetails={handleExitSeriesDetails} />}
+              <div className='series-align'>
+                {series && !activeSeries && !createSeries &&
+                series.sort((a, b) => a.id > b.id ? 1 : -1).map((currSeries) => 
+                <SeriesModel key={currSeries.id} deleteButton={true} handleSeriesDetails={
+                  (data) => handleSeriesDetails(data)} 
+                  handleExitSeriesDetails={handleExitSeriesDetails} 
+                  series={currSeries} userid={user.id} /> )}
+              </div>
+            </div>} />
+        </Routes>
     )
 }
 
