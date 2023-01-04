@@ -1,13 +1,48 @@
 import { useState } from 'react'; 
 import { Link } from 'react-router-dom';
 
+function handleRateClick(id) {
+  console.log(id);
+}
+
 function EditSeries(props) {
     const [seriesName, setSeriesName] = useState(props.series.seriesName);
-    const [imgUrl, setImgUrl] = useState(props.series.imageUrl);
     const [comments, setComments] = useState(props.series.comments);
+    const [currentRating, setCurrentRating] = useState(props.series.rating);
+    const [rating, setRating] = useState([]);
 
     if(props.series.comments == null) {
-        props.series.comments = 'Your comments...'
+      setComments('Your comments...');
+      props.series.comments = comments;
+    }
+
+    if(props.series.rating == null) {
+      setCurrentRating(0);
+      props.series.rating = currentRating;
+    }
+
+    if(rating.length === 0) {
+      for(let i=1; i<=5; i++) {
+        if(i <= currentRating) {
+          rating.push(<span key={5*props.series.id+i} onClick={() => handleRateClick(i)} className="fa fa-star series-star checked"></span>)
+        } else {
+          rating.push(<span key={5*props.series.id+i} onClick={() => handleRateClick(i)} className="fa fa-star series-star"></span>)
+        }
+      }
+    }
+
+
+    function handleRateClick(id) {
+      setRating([]);
+      setCurrentRating(id);
+    
+      for(let i=1; i<=5; i++) {
+        if(i <= currentRating) {
+          rating.push(<span key={5*props.series.id+i} onClick={() => handleRateClick(i)} className="fa fa-star series-star checked"></span>)
+        } else {
+          rating.push(<span key={5*props.series.id+i} onClick={() => handleRateClick(i)} className="fa fa-star series-star"></span>)
+        }
+      }
     }
 
     function handleSubmit(e) {
@@ -21,7 +56,8 @@ function EditSeries(props) {
             body: JSON.stringify({
                 seriesName: seriesName,
                 episodes: 80,
-                imageUrl: imgUrl,
+                imageUrl: props.series.imageUrl,
+                rating: currentRating,
                 comments: comments,
             })
         })
@@ -48,9 +84,11 @@ function EditSeries(props) {
               <input type='text' required value={seriesName} placeholder={seriesName} 
                 onChange={(e) => setSeriesName(e.target.value)}>
               </input><br/>
-              <input type='text' required value={imgUrl} placeholder='Image Url' 
-                onChange={(e) => setImgUrl(e.target.value)}>
-              </input><br/>
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+              {
+                rating.map((star) => star)
+              }
+
               <textarea placeholder={props.series.comments} value={comments} 
                 onChange={(e) => {console.log(e.target.value); setComments(e.target.value)}}>
               </textarea>
