@@ -5,11 +5,19 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 function Login(props){
+    // Used to get typed in email
     const [email, setEmail] = useState('');
+
+    // Used to get typed in password
     const [password, setPassword] = useState('');
+
+    // Used to get error message if login is unsuccessful
     const [attemptLogin, setAttempLogin] = useState('');
+
+    // Used to navigate if login is successful to series page
     const navigate = useNavigate();
 
+    // Function to send in data to local database after submitting the form
     function handleSubmit(e) {
         e.preventDefault();
         
@@ -26,25 +34,29 @@ function Login(props){
             if(data.Error === null || password !== data.password){
                 throw Error("Invalid credentails!")
             }
-
-            setAttempLogin('');          
+            // Transmit to the App component that login is successful 
             props.activateLogin(data);
+
+            // Navigate to series page
             navigate('../series');
             
         })
         .catch((error) => {
+            // Update and get the error message to the screen
             setAttempLogin(error.message);
-            console.error(error);
         })
     }
 
     return (
         <div className='background'>
+          {/* Back button in the navbar */}
           <div className='background-fade' style={{'textAlign': 'left'}}>
             <Link to='/'>
               <button className='navbar-button'>Back</button>
             </Link> 
           </div>
+
+          {/* Submission form with typed in credentials */}
           <div className='login-border'>
             <form onSubmit={(e) => handleSubmit(e)}>
               <label>Sign In </label>
