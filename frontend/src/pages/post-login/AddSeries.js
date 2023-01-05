@@ -6,6 +6,9 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
+
+/* Parse the csv file into array */
+/* records[i] =  [id, name, imgUrl] */
 var records = null;
 Papa.parse(csvFile, {
   download: true,
@@ -17,10 +20,16 @@ Papa.parse(csvFile, {
 });
 
 function AddSeries(props) {
+    // Used to get typed in searched series
     const [searchSeries, setSearchSeries] = useState('');
+
+    // Used to get all the series 
     const [series, setSeries] = useState(records);
+
+    // Used to navigate back to series page after clicking on a series
     const navigate = useNavigate();
 
+    // Function to add data to local database after click event
     function handleSubmit(data) {
         fetch('http://localhost:8080/' + props.userid + '/series', {
             method: 'POST', 
@@ -34,7 +43,11 @@ function AddSeries(props) {
             })
         })
         .then((response) => {        
+            
+            // Inform the Series component to rerender
             props.handleExitAddSeries();
+
+            // Navigate back to series component
             if(response.ok) {
                 navigate(-1);
             }
@@ -44,6 +57,9 @@ function AddSeries(props) {
         }) 
     }
 
+
+    // Function that filters and keeps only the series that contain the 
+    // searched series as a substring.
     function handleSearchEntries(e) {
       setSeries(records.filter((record) => { 
         return record[1].toLowerCase().includes(e.target.value.toLowerCase())
@@ -53,15 +69,21 @@ function AddSeries(props) {
 
     return (
         <div className='series-popup' style={{'overflow': 'auto'}}>
+          
+          {/* Navbar code */}
           <div className='background-fade' style={{'textAlign': 'left'}}>
+            {/* Back button */}
             <Link to='../'>
               <button onClick={props.handleExitAddSeries} className='navbar-button'>Back</button> 
             </Link> 
+            {/* Search bar */}
             <form className='series-search-bar'>
               <input type='text' className='series-search-bar-field' value={searchSeries} placeholder='Search Series' 
                 onChange={(e) => handleSearchEntries(e)} /> 
             </form>
           </div>
+
+          {/* Render a slice of all the series */}
           <div className='series-align'>
             {series &&
              series.slice(0, 204).map((currRecord) => {
