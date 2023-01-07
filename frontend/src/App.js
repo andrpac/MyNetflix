@@ -37,7 +37,7 @@ function App() {
         <Route exact path='/login' element={<Login activateLogin = {(data) => enableLogin(data)} />} />
         <Route path='/register' element={<Register />} />
         {loginEnable && <Route exact path='/series/*' element={<Series user={user} />} />}
-        <Route path='*'element={<div className='background'></div>}></Route>
+        <Route path='*'element={<div className='background'><h1 style={{'color': 'red'}}>Error</h1></div>}></Route>
       </Routes>
     </Router>
   );
