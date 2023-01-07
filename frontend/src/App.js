@@ -6,7 +6,7 @@ import Register from './pages/pre-login/Register';
 import Series from './pages/post-login/Series';
 
 import { useState } from 'react';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {HashRouter as Router, Route, Routes} from 'react-router-dom';
 
 
 function App() {
